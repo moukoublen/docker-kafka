@@ -17,7 +17,7 @@ services:
       server.advertised.listeners: INSIDE://kafka1:9092,OUTSIDE://localhost:19101
       server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       server.inter.broker.listener.name: INSIDE
-      server.auto_create_topics_enable: "false"
+      server.auto.create.topics.enable: "false"
     depends_on:
       - zookeeper
     restart: on-failure
@@ -33,7 +33,7 @@ services:
       server.advertised.listeners: INSIDE://kafka2:9092,OUTSIDE://localhost:19102
       server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       server.inter.broker.listener.name: INSIDE
-      server.auto_create_topics_enable: "false"
+      server.auto.create.topics.enable: "false"
     depends_on:
       - zookeeper
     restart: on-failure
@@ -49,7 +49,7 @@ services:
       server.advertised.listeners: INSIDE://kafka3:9092,OUTSIDE://localhost:19103
       server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       server.inter.broker.listener.name: INSIDE
-      server.auto_create_topics_enable: "false"
+      server.auto.create.topics.enable: "false"
     depends_on:
       - zookeeper
     restart: on-failure

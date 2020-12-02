@@ -17,7 +17,7 @@ services:
       server.advertised.listeners: INSIDE://kafka:9092,OUTSIDE://localhost:9094
       server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       server.inter.broker.listener.name: INSIDE
-      server.auto_create_topics_enable: "false"
+      server.auto.create.topics.enable: "false"
     depends_on:
       - zookeeper
     restart: on-failure
