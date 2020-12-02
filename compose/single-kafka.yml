@@ -7,7 +7,7 @@ services:
     restart: on-failure
 
   kafka:
-    image: mykafka:latest
+    image: moukoublen/kafka
     ports:
       - "9094:9094"
     environment:
