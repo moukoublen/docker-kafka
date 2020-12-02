@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -e
+
+KAFKA_HOME=${KAFKA_HOME:-"/opt/kafka"}
+
+#Restore original config on each run in order to apply the (possible new) overwrites each time
+cp $KAFKA_HOME/config-backup/server.properties $KAFKA_HOME/config/server.properties
+echo "" >> "${KAFKA_HOME}/config/server.properties"
+cp $KAFKA_HOME/config-backup/log4j.properties $KAFKA_HOME/config/log4j.properties
+echo "" >> "${KAFKA_HOME}/config/log4j.properties"
+
+(
+function updateConfig() {
+  key=$1
+  value=$2
+  file=$3
+
+  if grep --fixed-strings --quiet "${key}=" "${file}"; then
+    echo "KAFKA CONFIG UPDATE '$key' IN '$file'"
+    k="${key//&/\\&}"
+    v="${value//&/\\&}"
+    sed --regexp-extended --in-place "s&^#?${k}=.*$&${k}=${v}&g" "${file}"
+  else
+    echo "KAFKA CONFIG APPEND '${key}' IN '${file}'"
+    echo "${key}=${value}" >> "${file}"
+  fi
+}
+
+# Default overwrite value for log dirs
+updateConfig "log.dirs" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
+
+IFS=$'\n'
+for VAR in $(env)
+do
+  env_var=$(echo "${VAR}" | cut --delimiter== --fields=1)
+  env_val=$(echo "${VAR}" | cut --delimiter== --fields=2)
+
+  if [[ $env_var =~ ^server\. ]]; then
+    server_conf_name=$(echo "$env_var" | cut --delimiter=. --fields=2- )
+    updateConfig "${server_conf_name}" "${env_val}" "${KAFKA_HOME}/config/server.properties"
+  fi
+
+  if [[ $env_var =~ ^log4j\. ]]; then
+    updateConfig "${env_var}" "${env_val}" "${KAFKA_HOME}/config/log4j.properties"
+  fi
+done
+)
+
+exec "${KAFKA_HOME}/bin/kafka-server-start.sh" "${KAFKA_HOME}/config/server.properties"

@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: zookeeper:3.5.8
+    ports:
+      - "2181:2181"
+    restart: on-failure
+
+  kafka1:
+    image: moukoublen/kafka
+    ports:
+      - "19101:9094"
+    environment:
+      server.broker.id: 101
+      server.zookeeper.connect: zookeeper:2181/cluster1
+      server.listeners: INSIDE://:9092,OUTSIDE://:9094
+      server.advertised.listeners: INSIDE://kafka1:9092,OUTSIDE://localhost:19101
+      server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      server.inter.broker.listener.name: INSIDE
+      server.auto_create_topics_enable: "false"
+    depends_on:
+      - zookeeper
+    restart: on-failure
+
+  kafka2:
+    image: moukoublen/kafka
+    ports:
+      - "19102:9094"
+    environment:
+      server.broker.id: 102
+      server.zookeeper.connect: zookeeper:2181/cluster1
+      server.listeners: INSIDE://:9092,OUTSIDE://:9094
+      server.advertised.listeners: INSIDE://kafka2:9092,OUTSIDE://localhost:19102
+      server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      server.inter.broker.listener.name: INSIDE
+      server.auto_create_topics_enable: "false"
+    depends_on:
+      - zookeeper
+    restart: on-failure
+
+  kafka3:
+    image: moukoublen/kafka
+    ports:
+      - "19103:9094"
+    environment:
+      server.broker.id: 103
+      server.zookeeper.connect: zookeeper:2181/cluster1
+      server.listeners: INSIDE://:9092,OUTSIDE://:9094
+      server.advertised.listeners: INSIDE://kafka3:9092,OUTSIDE://localhost:19103
+      server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      server.inter.broker.listener.name: INSIDE
+      server.auto_create_topics_enable: "false"
+    depends_on:
+      - zookeeper
+    restart: on-failure
