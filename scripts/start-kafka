@@ -29,6 +29,7 @@ function updateConfig() {
 
 # Default overwrite value for log dirs
 updateConfig "log.dirs" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
+updateConfig "log.dir" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
 
 IFS=$'\n'
 for VAR in $(env)
