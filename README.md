@@ -9,7 +9,7 @@ The image is available directly from [Docker Hub](https://hub.docker.com/r/mouko
 Based on excellent work of  [wurstmeister/kafka](https://github.com/wurstmeister/kafka-docker)
 
 
-Use properties from [broker config](https://kafka.apache.org/documentation/#brokerconfigs) directly as environment variables
+Use properties from [broker config](https://kafka.apache.org/documentation/#brokerconfigs) directly as environment variables with `server.` prefix for `server.properties` file and `log4j.` for `log4j.properties `file
 
 ```yml
 version: '3.8'
@@ -27,6 +27,8 @@ services:
       server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       server.inter.broker.listener.name: INSIDE
       server.auto_create_topics_enable: "false"
+      log4j.logger.kafka: DEBUG
+      log4j.logger.org.apache.kafka: DEBUG
     restart: on-failure
 ```
 
