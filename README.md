@@ -1,4 +1,4 @@
-kafka-docker
+Kafka Docker
 ============
 
 Kafka docker image with `adoptopenjdk`.
@@ -31,4 +31,12 @@ services:
       log4j.logger.org.apache.kafka: DEBUG
     restart: on-failure
 ```
+
+### Docker compose examples
+```shell
+docker-compose -f compose/single-kafka.yml up
+#or
+docker-compose -f compose/cluster-kafka.yml up
+```
+
 
