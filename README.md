@@ -3,9 +3,6 @@ Kafka Docker
 
 Kafka docker image with `adoptopenjdk`.
 
-
-The image is available in [Docker Hub](https://hub.docker.com/r/moukoublen/kafka/)
-
 The repo is located in [Github](https://github.com/moukoublen/docker-kafka)
 
 Based on excellent work of  [wurstmeister/kafka](https://github.com/wurstmeister/kafka-docker)
@@ -43,6 +40,5 @@ docker-compose -f compose/cluster-kafka.yml up
 ```
 
 
-### Docker hub / git tags
+### Docker hub image tags
 Schema: `<scala version>-<kafka version>_<revision>`
-
