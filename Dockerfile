@@ -2,7 +2,7 @@ ARG jre=adoptopenjdk:11.0.9.1_1-jre-hotspot-focal
 
 FROM ${jre}
 
-ARG kafka_version=2.6.0
+ARG kafka_version=2.7.0
 ARG scala_version=2.13
 
 ENV KAFKA_VERSION=$kafka_version \

@@ -20,6 +20,7 @@ services:
     ports:
       - "9094:9094"
     environment:
+      KAFKA_HEAP_OPTS: -Xmx2g -Xms2g
       server.broker.id: 1
       server.zookeeper.connect: zookeeper:2181
       server.listeners: INSIDE://kafka:9092,OUTSIDE://kafka:9094

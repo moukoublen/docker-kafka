@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+args=( \
+  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.6.0 2.12" \
+  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.6.0 2.13" \
+  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.7.0 2.12" \
+  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.7.0 2.13" \
+)
+
+for a in "${args[@]}"
+do
+  IFS=" " read -r -a img_args <<< "${a}"
+  jre="${img_args[0]}"
+  kafka="${img_args[1]}"
+  scala="${img_args[2]}"
+  docker build . \
+    --build-arg jre="${jre}" \
+    --build-arg kafka_version="${kafka}" \
+    --build-arg scala_version="${scala}" \
+    --tag "moukoublen/kafka:${scala}-${kafka}"
+done
+
+for a in "${args[@]}"
+do
+  IFS=" " read -r -a img_args <<< "${a}"
+  kafka="${img_args[1]}"
+  scala="${img_args[2]}"
+  docker push "moukoublen/kafka:${scala}-${kafka}"
+done
