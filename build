@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 args=( \
-  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.6.0 2.12 1" \
-  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.6.0 2.13 1" \
-  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.7.0 2.12 1" \
-  "adoptopenjdk:11.0.9.1_1-jre-hotspot-focal 2.7.0 2.13 1" \
+  "adoptopenjdk:11.0.10_9-jre-hotspot 2.6.0 2.12 2" \
+  "adoptopenjdk:11.0.10_9-jre-hotspot 2.6.0 2.13 2" \
+  "adoptopenjdk:11.0.10_9-jre-hotspot 2.6.1 2.12 1" \
+  "adoptopenjdk:11.0.10_9-jre-hotspot 2.6.1 2.13 1" \
+  "adoptopenjdk:11.0.10_9-jre-hotspot 2.7.0 2.12 2" \
+  "adoptopenjdk:11.0.10_9-jre-hotspot 2.7.0 2.13 2" \
 )
 
 for a in "${args[@]}"
@@ -14,6 +16,7 @@ do
   kafka="${img_args[1]}"
   scala="${img_args[2]}"
   revision="${img_args[3]}"
+  echo -e "\e[34m> Building moukoublen/kafka:${scala}-${kafka}_${revision}\e[0m"
   docker build . \
     --build-arg jre="${jre}" \
     --build-arg kafka_version="${kafka}" \
@@ -27,5 +30,8 @@ do
   kafka="${img_args[1]}"
   scala="${img_args[2]}"
   revision="${img_args[3]}"
+  echo -e "\e[34m> Pushing moukoublen/kafka:${scala}-${kafka}_${revision}\e[0m"
   docker push "moukoublen/kafka:${scala}-${kafka}_${revision}"
 done
+
+docker
