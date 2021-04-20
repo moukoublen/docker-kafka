@@ -5,27 +5,33 @@ build_and_push() {
   local scala="$2"
   local kafka="$3"
   local revision="$4"
-  local tag="moukoublen/kafka:${scala}-${kafka}_${revision}"
-  echo -e "\e[34m>\e[0m Building \e[34mmoukoublen/kafka:${scala}-${kafka}_${revision}\e[0m   with jre \e[34m${jre}\e[0m"
+  local tag="moukoublen/kafka:${scala}-${kafka}-${revision}"
+  echo -e "\e[34m>>>\e[0m Building \e[34m${tag}\e[0m with jre \e[34m${jre}\e[0m"
+  docker pull "${tag}"
   docker build . \
     --build-arg jre="${jre}" \
     --build-arg kafka_version="${kafka}" \
     --build-arg scala_version="${scala}" \
     --tag "${tag}"
 
-  echo -e "\e[34m>\e[0m Pushing \e[34mmoukoublen/kafka:${scala}-${kafka}_${revision}\e[0m with jre \e[34m${jre}\e[0m"
-  #docker push "${tag}"
+  echo -e "\e[34m>>>\e[0m Pushing \e[34m${tag}\e[0m with jre \e[34m${jre}\e[0m"
+  docker push "${tag}"
 }
 
-#build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot' '2.13' '2.7.0' '2'
-#build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot' '2.12' '2.7.0' '2'
-#build_and_push 'adoptopenjdk:11.0.9.1_1-jre-hotspot-focal' '2.13' '2.7.0' '1'
-#build_and_push 'adoptopenjdk:11.0.9.1_1-jre-hotspot-focal' '2.12' '2.7.0' '1'
+docker pull adoptopenjdk:11.0.10_9-jre-hotspot-focal
 
-#build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot' '2.13' '2.6.1' '1'
-#build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot' '2.12' '2.6.1' '1'
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.12' '2.6.0' '1'
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.13' '2.6.0' '1'
 
-#build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot' '2.13' '2.6.0' '2'
-#build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot' '2.12' '2.6.0' '2'
-#build_and_push 'adoptopenjdk:11.0.9.1_1-jre-hotspot-focal' '2.13' '2.6.0' '1'
-#build_and_push 'adoptopenjdk:11.0.9.1_1-jre-hotspot-focal' '2.12' '2.6.0' '1'
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.12' '2.6.1' '1'
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.13' '2.6.1' '1'
+
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.12' '2.7.0' '1'
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.13' '2.7.0' '1'
+
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.12' '2.8.0' '1'
+build_and_push 'adoptopenjdk:11.0.10_9-jre-hotspot-focal' '2.13' '2.8.0' '1'
+
+
+docker tag "moukoublen/kafka:2.13-2.8.0-1" "moukoublen/kafka:latest"
+docker push "moukoublen/kafka:latest"

@@ -15,9 +15,13 @@ ADD install-scripts /tmp/install-scripts
 ADD scripts /usr/bin/
 
 RUN apt-get update && \
-    apt-get install -y jq bash && \
+    apt-get install -y jq sed bash && \
     /tmp/install-scripts/install-kafka.bash && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    apt-get remove --purge jq --yes && \
+    apt-get autoremove --purge --yes && \
+    apt-get clean autoclean && \
+    rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/kafka-logs"]
 
