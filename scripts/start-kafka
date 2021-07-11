@@ -4,14 +4,7 @@ set -e
 
 KAFKA_HOME=${KAFKA_HOME:-"/opt/kafka"}
 
-#Restore original config on each run in order to apply the (possible new) overwrites each time
-cp $KAFKA_HOME/config-backup/server.properties $KAFKA_HOME/config/server.properties
-echo "" >> "${KAFKA_HOME}/config/server.properties"
-cp $KAFKA_HOME/config-backup/log4j.properties $KAFKA_HOME/config/log4j.properties
-echo "" >> "${KAFKA_HOME}/config/log4j.properties"
-
-(
-function updateConfig() {
+__updateConfig() {
   key=$1
   value=$2
   file=$3
@@ -27,25 +20,39 @@ function updateConfig() {
   fi
 }
 
-# Default overwrite value for log dirs
-updateConfig "log.dirs" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
-updateConfig "log.dir" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
+__apply_config_source_env_vars() {
+  # Restore original config on each run in order to apply the (possible new) overwrites each time
+  cp $KAFKA_HOME/config-backup/server.properties $KAFKA_HOME/config/server.properties
+  echo "" >> "${KAFKA_HOME}/config/server.properties"
+  cp $KAFKA_HOME/config-backup/log4j.properties $KAFKA_HOME/config/log4j.properties
+  echo "" >> "${KAFKA_HOME}/config/log4j.properties"
 
-IFS=$'\n'
-for VAR in $(env)
-do
-  env_var=$(echo "${VAR}" | cut --delimiter== --fields=1)
-  env_val=$(echo "${VAR}" | cut --delimiter== --fields=2)
+  # Default overwrite value for log dirs
+  __updateConfig "log.dirs" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
+  __updateConfig "log.dir" "/kafka-logs" "${KAFKA_HOME}/config/server.properties"
 
-  if [[ $env_var =~ ^server\. ]]; then
-    server_conf_name=$(echo "$env_var" | cut --delimiter=. --fields=2- )
-    updateConfig "${server_conf_name}" "${env_val}" "${KAFKA_HOME}/config/server.properties"
-  fi
+  IFS=$'\n'
+  for VAR in $(env)
+  do
+    env_var=$(echo "${VAR}" | cut --delimiter== --fields=1)
+    env_val=$(echo "${VAR}" | cut --delimiter== --fields=2)
 
-  if [[ $env_var =~ ^log4j\. ]]; then
-    updateConfig "${env_var}" "${env_val}" "${KAFKA_HOME}/config/log4j.properties"
-  fi
-done
-)
+    if [[ $env_var =~ ^server\. ]]; then
+      server_conf_name=$(echo "$env_var" | cut --delimiter=. --fields=2- )
+      __updateConfig "${server_conf_name}" "${env_val}" "${KAFKA_HOME}/config/server.properties"
+    fi
+
+    if [[ $env_var =~ ^log4j\. ]]; then
+      __updateConfig "${env_var}" "${env_val}" "${KAFKA_HOME}/config/log4j.properties"
+    fi
+  done
+}
+
+CONFIG_SOURCE=${CONFIG_SOURCE:-"env"}
+case "$CONFIG_SOURCE" in
+  env)   __apply_config_source_env_vars ;;
+  files) ;;
+    *) echo "wrong value (${CONFIG_SOURCE}) for \$CONFIG_SOURCE" && exit 2;;
+esac
 
 exec "${KAFKA_HOME}/bin/kafka-server-start.sh" "${KAFKA_HOME}/config/server.properties"

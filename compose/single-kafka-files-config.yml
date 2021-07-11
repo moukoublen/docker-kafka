@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: zookeeper:3.5.9
+    ports:
+      - "2181:2181"
+    restart: on-failure
+
+  kafka:
+    image: moukoublen/kafka:latest
+    ports:
+      - "9094:9094"
+    environment:
+      KAFKA_HEAP_OPTS: -Xmx2g -Xms2g
+      CONFIG_SOURCE: files
+    volumes:
+      - $PWD/compose/server.properties:/opt/kafka/config/server.properties
+      - $PWD/compose/log4j.properties:/opt/kafka/config/log4j.properties
+    depends_on:
+      - zookeeper
+    restart: on-failure

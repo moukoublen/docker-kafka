@@ -1,16 +1,17 @@
 version: '3.8'
 services:
   zookeeper:
-    image: zookeeper:3.5.8
+    image: zookeeper:3.5.9
     ports:
       - "2181:2181"
     restart: on-failure
 
   kafka:
-    image: moukoublen/kafka
+    image: moukoublen/kafka:latest
     ports:
       - "9094:9094"
     environment:
+      KAFKA_CONFIG_SOURCE: env
       server.broker.id: 1
       server.zookeeper.connect: zookeeper:2181
       server.listeners: INSIDE://kafka:9092,OUTSIDE://kafka:9094
@@ -18,6 +19,8 @@ services:
       server.listener.security.protocol.map: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       server.inter.broker.listener.name: INSIDE
       server.auto.create.topics.enable: "false"
+      log4j.logger.kafka: DEBUG
+      log4j.logger.org.apache.kafka: DEBUG
     depends_on:
       - zookeeper
     restart: on-failure

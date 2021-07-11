@@ -2,7 +2,7 @@ ARG jre=adoptopenjdk:11.0.10_9-jre-hotspot
 
 FROM ${jre}
 
-ARG kafka_version=2.7.0
+ARG kafka_version=2.8.0
 ARG scala_version=2.13
 
 ENV KAFKA_VERSION=$kafka_version \
@@ -14,13 +14,14 @@ ENV PATH=${PATH}:${KAFKA_HOME}/bin
 ADD install-scripts /tmp/install-scripts
 ADD scripts /usr/bin/
 
-RUN apt-get update && \
-    apt-get install -y jq sed bash && \
-    /tmp/install-scripts/install-kafka.bash && \
-    rm -rf /tmp/* && \
-    apt-get remove --purge jq --yes && \
-    apt-get autoremove --purge --yes && \
-    apt-get clean autoclean && \
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y jq sed bash; \
+    /tmp/install-scripts/install-kafka.bash; \
+    rm -rf /tmp/*; \
+    apt-get remove --purge jq --yes; \
+    apt-get autoremove --purge --yes; \
+    apt-get clean autoclean; \
     rm -rf /var/lib/apt/lists/*
 
 VOLUME ["/kafka-logs"]
