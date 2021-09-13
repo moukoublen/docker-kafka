@@ -1,4 +1,4 @@
-ARG jre=adoptopenjdk:11.0.10_9-jre-hotspot
+ARG jre=adoptopenjdk:11.0.11_9-jre-hotspot-focal
 
 FROM ${jre}
 

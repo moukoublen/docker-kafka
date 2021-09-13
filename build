@@ -3,37 +3,34 @@
 set -e
 
 
-./build-image --push                                    \
+./build-image                                           \
   --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
   --scala    '2.12'                                     \
   --kafka    '2.7.1'                                    \
-  --revision '1'
+  --push
 
-./build-image --push                                    \
+./build-image                                           \
   --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
   --scala    '2.13'                                     \
   --kafka    '2.7.1'                                    \
-  --revision '1'
+  --push
 
 
-
-./build-image --push                                    \
+./build-image                                           \
   --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
   --scala    '2.12'                                     \
   --kafka    '2.8.0'                                    \
-  --revision '1'
+  --push
 
-./build-image --push                                    \
+./build-image                                           \
   --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
   --scala    '2.13'                                     \
   --kafka    '2.8.0'                                    \
-  --revision '1'
+  --push
 
-./build-image --push                                    \
+./build-image                                           \
   --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
   --scala    '2.13'                                     \
   --kafka    '2.8.0'                                    \
-  --revision '1'                                        \
-  --tag      'latest'
-
-
+  --tag      'latest'                                   \
+  --push

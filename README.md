@@ -76,4 +76,10 @@ docker-compose -f compose/cluster-kafka.yml up
 
 
 ## Docker hub image tags
-Schema: `<scala version>-<kafka version>-<revision>`
+Schema: `<scala version>-<kafka version>`
+
+### Tags
+- `2.13-2.8.0`, `latest`
+- `2.12-2.8.0`
+- `2.13-2.7.1`
+- `2.12-2.7.1`

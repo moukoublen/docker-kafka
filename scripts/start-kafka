@@ -52,7 +52,7 @@ CONFIG_SOURCE=${CONFIG_SOURCE:-"env"}
 case "$CONFIG_SOURCE" in
   env)   __apply_config_source_env_vars ;;
   files) ;;
-    *) echo "wrong value (${CONFIG_SOURCE}) for \$CONFIG_SOURCE" && exit 2;;
+  *) echo "wrong value (${CONFIG_SOURCE}) for \$CONFIG_SOURCE" && exit 2;;
 esac
 
 exec "${KAFKA_HOME}/bin/kafka-server-start.sh" "${KAFKA_HOME}/config/server.properties"

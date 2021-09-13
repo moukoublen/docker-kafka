@@ -5,23 +5,20 @@ set -e
 __tag() {
   local scala="${1}"
   local kafka="${2}"
-  local revision="${3}"
-  printf "${scala}-${kafka}-${revision}"
+  printf "${scala}-${kafka}"
 }
 
 DEFAULT_ARG_JRE='adoptopenjdk:11.0.11_9-jre-hotspot-focal'
 DEFAULT_ARG_SCALA='2.13'
 DEFAULT_ARG_KAFKA='2.8.0'
-DEFAULT_ARG_REVISION='1'
-DEFAULT_ARG_TAG=$(__tag "${DEFAULT_ARG_SCALA}" "${DEFAULT_ARG_KAFKA}" "${DEFAULT_ARG_REVISION}")
+DEFAULT_ARG_TAG=$(__tag "${DEFAULT_ARG_SCALA}" "${DEFAULT_ARG_KAFKA}")
 
 __show_help() {
   echo "$0"
-  echo "     -h, --help                  Display this message"
+  echo "     -h, --help                 Display this message"
   echo "     -j, --jre       <string>   Set jre version   (default ${DEFAULT_ARG_JRE})"
   echo "     -s, --scala     <string>   Set scala version (default ${DEFAULT_ARG_SCALA})"
   echo "     -k, --kafka     <string>   Set kafka version (default ${DEFAULT_ARG_KAFKA})"
-  echo "     -r, --revision  <string>   Set revision      (default ${DEFAULT_ARG_REVISION})"
   echo "     -t, --tag       <string>   Set image tag     (default ${DEFAULT_ARG_TAG})"
   echo "     -p, --push                 Push image after build is complete"
 }
@@ -29,7 +26,6 @@ __show_help() {
 ARG_JRE=$DEFAULT_ARG_JRE
 ARG_SCALA=$DEFAULT_ARG_SCALA
 ARG_KAFKA=$DEFAULT_ARG_KAFKA
-ARG_REVISION=$DEFAULT_ARG_REVISION
 ARG_TAG=
 ARG_PUSH=
 while (($#)); do
@@ -50,10 +46,6 @@ while (($#)); do
       ARG_KAFKA="${2}"
       shift 2
       ;;
-    -r|--revision)
-      ARG_REVISION="${2}"
-      shift 2
-      ;;
     -t|--tag)
       ARG_TAG="${2}"
       shift 2
@@ -70,7 +62,7 @@ while (($#)); do
   esac
 done
 
-[ -z "${ARG_TAG}" ] && ARG_TAG=$(__tag "${ARG_SCALA}" "${ARG_KAFKA}" "${ARG_REVISION}")
+[ -z "${ARG_TAG}" ] && ARG_TAG=$(__tag "${ARG_SCALA}" "${ARG_KAFKA}")
 
 IMAGE_NAME="moukoublen/kafka:${ARG_TAG}"
 
@@ -78,8 +70,10 @@ echo -e "\e[34m>>>\e[0m Building \e[34m${IMAGE_NAME}\e[0m"
 echo -e "             with jre      \e[34m${ARG_JRE}\e[0m"
 echo -e "             with scala    \e[34m${ARG_SCALA}\e[0m"
 echo -e "             with kafka    \e[34m${ARG_KAFKA}\e[0m"
-echo -e "             with revision \e[34m${ARG_REVISION}\e[0m"
 echo ""
+
+#docker pull "${IMAGE_NAME}"
+
 docker build . \
   --build-arg jre="${ARG_JRE}" \
   --build-arg kafka_version="${ARG_KAFKA}" \
