@@ -72,6 +72,8 @@ services:
 docker-compose -f compose/single-kafka.yml up
 #or
 docker-compose -f compose/cluster-kafka.yml up
+#or for kraft cluster
+docker-compose -f compose/kraft-cluster.yml up
 ```
 
 
@@ -79,7 +81,8 @@ docker-compose -f compose/cluster-kafka.yml up
 Schema: `<scala version>-<kafka version>`
 
 ### Tags
-- `2.13-2.8.0`, `latest`
+- `2.13-3.0.0`, `latest`
+- `2.13-2.8.0`
 - `2.12-2.8.0`
 - `2.13-2.7.1`
 - `2.12-2.7.1`

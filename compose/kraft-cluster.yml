@@ -1,0 +1,46 @@
+version: '3.8'
+
+x-environment-common: &environment-common
+  KAFKA_CONFIG_SOURCE: env
+  CLUSTER_ID: w3rNt4dlTIW_RoSUh7cmAQ
+  server.auto.create.topics.enable: "false"
+  server.inter.broker.listener.name: INTERNAL
+  server.controller.listener.names: CONTROLLER
+  server.listener.security.protocol.map: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+  server.listeners: INTERNAL://:9092,EXTERNAL://:9094,CONTROLLER://:9093
+  server.process.roles: broker,controller
+
+
+services:
+  kafka1:
+    image: moukoublen/kafka:latest
+    ports:
+      - "19101:9094"
+    environment:
+      <<: *environment-common
+      server.node.id: 1
+      server.advertised.listeners: INTERNAL://kafka1:9092,CONTROLLER://kafka1:9093,EXTERNAL://localhost:19101
+      server.controller.quorum.voters: 1@kafka1:9093,2@kafka2:9093,3@kafka3:9093
+    restart: on-failure
+
+  kafka2:
+    image: moukoublen/kafka:latest
+    ports:
+      - "19102:9094"
+    environment:
+      <<: *environment-common
+      server.node.id: 2
+      server.advertised.listeners: INTERNAL://kafka2:9092,CONTROLLER://kafka2:9093,EXTERNAL://localhost:19102
+      server.controller.quorum.voters: 1@kafka1:9093,2@kafka2:9093,3@kafka3:9093
+    restart: on-failure
+
+  kafka3:
+    image: moukoublen/kafka:latest
+    ports:
+      - "19103:9094"
+    environment:
+      <<: *environment-common
+      server.node.id: 3
+      server.advertised.listeners: INTERNAL://kafka3:9092,CONTROLLER://kafka3:9093,EXTERNAL://localhost:19103
+      server.controller.quorum.voters: 1@kafka1:9093,2@kafka2:9093,3@kafka3:9093
+    restart: on-failure

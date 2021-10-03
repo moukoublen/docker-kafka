@@ -31,6 +31,12 @@ set -e
 ./build-image                                           \
   --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
   --scala    '2.13'                                     \
-  --kafka    '2.8.0'                                    \
+  --kafka    '3.0.0'                                    \
+  --push
+
+./build-image                                           \
+  --jre      'adoptopenjdk:11.0.11_9-jre-hotspot-focal' \
+  --scala    '2.13'                                     \
+  --kafka    '3.0.0'                                    \
   --tag      'latest'                                   \
   --push
