@@ -2,7 +2,7 @@ ARG jre=adoptopenjdk:11.0.11_9-jre-hotspot-focal
 
 FROM ${jre}
 
-ARG kafka_version=2.8.0
+ARG kafka_version=3.0.0
 ARG scala_version=2.13
 
 ENV KAFKA_VERSION=$kafka_version \
@@ -12,7 +12,6 @@ ENV KAFKA_VERSION=$kafka_version \
 ENV PATH=${PATH}:${KAFKA_HOME}/bin
 
 ADD install-scripts /tmp/install-scripts
-ADD scripts /usr/bin/
 
 RUN set -eux; \
     apt-get update; \
@@ -24,6 +23,7 @@ RUN set -eux; \
     apt-get clean autoclean; \
     rm -rf /var/lib/apt/lists/*
 
+ADD bin /usr/bin/
 VOLUME ["/kafka-logs"]
 
 CMD ["start-kafka"]

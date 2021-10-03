@@ -55,8 +55,8 @@ case "$CONFIG_SOURCE" in
   *) echo "wrong value (${CONFIG_SOURCE}) for \$CONFIG_SOURCE" && exit 2;;
 esac
 
-if [[ ! -z "$CLUSTER_ID" ]]; then
-  kafka-storage.sh format -t "${CLUSTER_ID}" -c "${KAFKA_HOME}/config/server.properties"
+if [[ -x "$(command -v kafka-storage.sh)" ]] && [[ ! -z "$CLUSTER_ID" ]]; then
+  kafka-storage.sh format --ignore-formatted -t "${CLUSTER_ID}" -c "${KAFKA_HOME}/config/server.properties"
 fi
 
 exec "${KAFKA_HOME}/bin/kafka-server-start.sh" "${KAFKA_HOME}/config/server.properties"

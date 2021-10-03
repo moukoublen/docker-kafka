@@ -13,7 +13,7 @@ x-environment-common: &environment-common
 
 services:
   kafka1:
-    image: moukoublen/kafka:latest
+    image: moukoublen/kafka:2.13-3.0.0
     ports:
       - "19101:9094"
     environment:
@@ -24,7 +24,7 @@ services:
     restart: on-failure
 
   kafka2:
-    image: moukoublen/kafka:latest
+    image: moukoublen/kafka:2.13-3.0.0
     ports:
       - "19102:9094"
     environment:
@@ -35,7 +35,7 @@ services:
     restart: on-failure
 
   kafka3:
-    image: moukoublen/kafka:latest
+    image: moukoublen/kafka:2.13-3.0.0
     ports:
       - "19103:9094"
     environment:
