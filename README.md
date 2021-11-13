@@ -1,7 +1,7 @@
 Kafka Docker
 ============
 
-Kafka docker image with `adoptopenjdk`.
+Kafka docker image with `openjdk`.
 
 The repo is located in [Github](https://github.com/moukoublen/docker-kafka)
 
@@ -82,7 +82,7 @@ Schema: `<scala version>-<kafka version>`
 
 ### Tags
 - `2.13-3.0.0`, `latest`
-- `2.13-2.8.0`
-- `2.12-2.8.0`
+- `2.13-2.8.1`
+- `2.12-2.8.1`
 - `2.13-2.7.1`
 - `2.12-2.7.1`

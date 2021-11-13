@@ -1,5 +1,5 @@
-ARG jre=adoptopenjdk:11.0.11_9-jre-hotspot-focal
-
+# syntax=docker/dockerfile:1
+ARG jre=openjdk:11.0.13-jre-slim-bullseye
 FROM ${jre}
 
 ARG kafka_version=3.0.0
@@ -15,7 +15,7 @@ ADD install-scripts /tmp/install-scripts
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y jq sed bash; \
+    apt-get install -y jq sed bash curl acl ca-certificates gzip libc6 procps tar zlib1g; \
     /tmp/install-scripts/install-kafka.bash; \
     rm -rf /tmp/*; \
     apt-get remove --purge jq --yes; \
@@ -24,6 +24,5 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*
 
 ADD bin /usr/bin/
-VOLUME ["/kafka-logs"]
 
 CMD ["start-kafka"]
