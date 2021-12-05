@@ -1,7 +1,8 @@
 Kafka Docker
 ============
 
-Kafka docker image with `openjdk`.
+Kafka docker image using `openjdk` and more specifically `openjdk:11-jre-slim-bullseye` as base image.
+Currently both `linux/amd64` and `linux/arm64` images are being produced.
 
 The repo is located in [Github](https://github.com/moukoublen/docker-kafka)
 
