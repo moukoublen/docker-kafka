@@ -3,31 +3,47 @@
 set -e
 
 
+#./build-image                                           \
+#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
+#  --scala    '2.12'                                     \
+#  --kafka    '2.7.1'                                    \
+#  --push
+#
+#./build-image                                           \
+#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
+#  --scala    '2.13'                                     \
+#  --kafka    '2.7.1'                                    \
+#  --push
+
 ./build-image                                           \
   --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
   --scala    '2.12'                                     \
-  --kafka    '2.7.1'                                    \
+  --kafka    '2.7.2'                                    \
   --push
 
 ./build-image                                           \
   --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
   --scala    '2.13'                                     \
-  --kafka    '2.7.1'                                    \
+  --kafka    '2.7.2'                                    \
   --push
 
+#./build-image                                           \
+#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
+#  --scala    '2.12'                                     \
+#  --kafka    '2.8.1'                                    \
+#  --push
+#
+#./build-image                                           \
+#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
+#  --scala    '2.13'                                     \
+#  --kafka    '2.8.1'                                    \
+#  --push
 
 ./build-image                                           \
   --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
   --scala    '2.12'                                     \
-  --kafka    '2.8.1'                                    \
+  --kafka    '3.0.0'                                    \
   --push
-
-./build-image                                           \
-  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-  --scala    '2.13'                                     \
-  --kafka    '2.8.1'                                    \
-  --push
-
 
 ./build-image                                           \
   --jre      'openjdk:11.0.13-jre-slim-bullseye'        \

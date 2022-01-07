@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.3.1
 ARG jre=openjdk:11.0.13-jre-slim-bullseye
 FROM ${jre}
 
@@ -13,14 +13,16 @@ ENV PATH=${PATH}:${KAFKA_HOME}/bin
 
 ADD install-scripts /tmp/install-scripts
 
-RUN set -eux; \
-    apt-get update; \
-    apt-get install -y jq sed bash curl acl ca-certificates gzip libc6 procps tar zlib1g; \
+RUN set -eux;                                \
+    apt-get update;                          \
+    apt-get install -y                       \
+        jq sed bash curl acl ca-certificates \
+        gzip libc6 procps tar zlib1g;        \
     /tmp/install-scripts/install-kafka.bash; \
-    rm -rf /tmp/*; \
-    apt-get remove --purge jq --yes; \
-    apt-get autoremove --purge --yes; \
-    apt-get clean autoclean; \
+    rm -rf /tmp/*;                           \
+    apt-get remove --purge jq --yes;         \
+    apt-get autoremove --purge --yes;        \
+    apt-get clean autoclean;                 \
     rm -rf /var/lib/apt/lists/*
 
 ADD bin /usr/bin/
