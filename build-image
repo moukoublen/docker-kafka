@@ -51,7 +51,7 @@ while (($#)); do
       shift 2
       ;;
     -p|--push)
-      ARG_PUSH="--push"
+      ARG_PUSH="--output=type=registry"
       shift
       ;;
     *)
@@ -76,7 +76,7 @@ echo ""
 set -x
 docker buildx build . \
   ${ARG_PUSH} \
-  --platform linux/amd64,linux/arm64/v8 \
+  --platform=linux/amd64,linux/arm64/v8 \
   --build-arg jre="${ARG_JRE}" \
   --build-arg kafka_version="${ARG_KAFKA}" \
   --build-arg scala_version="${ARG_SCALA}" \

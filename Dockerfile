@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.3.1
-ARG jre=openjdk:11.0.13-jre-slim-bullseye
+ARG jre=openjdk:17.0.2-slim-bullseye
 FROM ${jre}
 
-ARG kafka_version=3.0.0
+ARG kafka_version=3.1.0
 ARG scala_version=2.13
 
 ENV KAFKA_VERSION=$kafka_version \
