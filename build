@@ -2,70 +2,76 @@
 
 set -e
 
-
-#./build-image                                           \
-#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-#  --scala    '2.12'                                     \
-#  --kafka    '2.7.1'                                    \
-#  --push
-#
-#./build-image                                           \
-#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-#  --scala    '2.13'                                     \
-#  --kafka    '2.7.1'                                    \
-#  --push
+# eclipse-temurin:17.0.4.1_1-jre-jammy
 
 ./build-image                                           \
-  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
   --scala    '2.12'                                     \
-  --kafka    '2.7.2'                                    \
+  --kafka    '2.8.2'                                    \
   --push
 
 ./build-image                                           \
-  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
   --scala    '2.13'                                     \
-  --kafka    '2.7.2'                                    \
+  --kafka    '2.8.2'                                    \
   --push
 
-#./build-image                                           \
-#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-#  --scala    '2.12'                                     \
-#  --kafka    '2.8.1'                                    \
-#  --push
-#
-#./build-image                                           \
-#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-#  --scala    '2.13'                                     \
-#  --kafka    '2.8.1'                                    \
-#  --push
-
-#./build-image                                           \
-#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-#  --scala    '2.12'                                     \
-#  --kafka    '3.0.0'                                    \
-#  --push
-#
-#./build-image                                           \
-#  --jre      'openjdk:11.0.13-jre-slim-bullseye'        \
-#  --scala    '2.13'                                     \
-#  --kafka    '3.0.0'                                    \
-#  --push
 
 ./build-image                                           \
-  --jre      'openjdk:17.0.2-slim-bullseye'             \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
   --scala    '2.12'                                     \
-  --kafka    '3.1.0'                                    \
+  --kafka    '3.0.2'                                    \
   --push
 
 ./build-image                                           \
-  --jre      'openjdk:17.0.2-slim-bullseye'             \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
   --scala    '2.13'                                     \
-  --kafka    '3.1.0'                                    \
+  --kafka    '3.0.2'                                    \
+  --push
+
+
+./build-image                                           \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
+  --scala    '2.12'                                     \
+  --kafka    '3.1.2'                                    \
   --push
 
 ./build-image                                           \
-  --jre      'openjdk:17.0.2-slim-bullseye'             \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
   --scala    '2.13'                                     \
-  --kafka    '3.1.0'                                    \
+  --kafka    '3.1.2'                                    \
+  --push
+
+
+./build-image                                           \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
+  --scala    '2.12'                                     \
+  --kafka    '3.2.3'                                    \
+  --push
+
+./build-image                                           \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
+  --scala    '2.13'                                     \
+  --kafka    '3.2.3'                                    \
+  --push
+
+
+./build-image                                           \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
+  --scala    '2.12'                                     \
+  --kafka    '3.3.1'                                    \
+  --push
+
+./build-image                                           \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
+  --scala    '2.13'                                     \
+  --kafka    '3.3.1'                                    \
+  --push
+
+
+./build-image                                           \
+  --jre      'eclipse-temurin:17.0.4.1_1-jre-jammy'     \
+  --scala    '2.13'                                     \
+  --kafka    '3.3.1'                                    \
   --tag      'latest'                                   \
   --push

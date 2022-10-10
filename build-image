@@ -8,9 +8,9 @@ __tag() {
   printf "${scala}-${kafka}"
 }
 
-DEFAULT_ARG_JRE='openjdk:11.0.13-jre-slim-bullseye'
+DEFAULT_ARG_JRE='eclipse-temurin:17.0.4.1_1-jre-jammy'
 DEFAULT_ARG_SCALA='2.13'
-DEFAULT_ARG_KAFKA='2.8.0'
+DEFAULT_ARG_KAFKA='3.3.1'
 DEFAULT_ARG_TAG=$(__tag "${DEFAULT_ARG_SCALA}" "${DEFAULT_ARG_KAFKA}")
 
 __show_help() {
@@ -21,6 +21,7 @@ __show_help() {
   echo "     -k, --kafka     <string>   Set kafka version (default ${DEFAULT_ARG_KAFKA})"
   echo "     -t, --tag       <string>   Set image tag     (default ${DEFAULT_ARG_TAG})"
   echo "     -p, --push                 Push image after build is complete"
+  echo "     -l, --load                 Load image to local docker after build is complete"
 }
 
 ARG_JRE=$DEFAULT_ARG_JRE
@@ -28,6 +29,7 @@ ARG_SCALA=$DEFAULT_ARG_SCALA
 ARG_KAFKA=$DEFAULT_ARG_KAFKA
 ARG_TAG=
 ARG_PUSH=
+ARG_PLATFORM="--platform=linux/amd64,linux/arm64/v8"
 while (($#)); do
   case "${1}" in
     -h|--help)
@@ -54,6 +56,11 @@ while (($#)); do
       ARG_PUSH="--output=type=registry"
       shift
       ;;
+    -l|--load)
+      ARG_PLATFORM=
+      ARG_PUSH="--output=type=docker"
+      shift
+      ;;
     *)
       echo "Wrong arguments"
       __show_help
@@ -76,7 +83,7 @@ echo ""
 set -x
 docker buildx build . \
   ${ARG_PUSH} \
-  --platform=linux/amd64,linux/arm64/v8 \
+  ${ARG_PLATFORM} \
   --build-arg jre="${ARG_JRE}" \
   --build-arg kafka_version="${ARG_KAFKA}" \
   --build-arg scala_version="${ARG_SCALA}" \

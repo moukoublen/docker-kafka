@@ -1,7 +1,7 @@
 Kafka Docker
 ============
 
-Kafka docker image using `openjdk` and more specifically `openjdk:17-slim-bullseye` as base image.
+Kafka docker image using `OpenJDK` and more specifically `eclipse-temurin:17-jre-jammy` as base image.
 Currently both `linux/amd64` and `linux/arm64` images are being produced.
 
 Docker hub: [https://hub.docker.com/r/moukoublen/kafka](https://hub.docker.com/r/moukoublen/kafka).
@@ -84,8 +84,23 @@ docker-compose -f compose/kraft-cluster.yml up
 Schema: `<scala version>-<kafka version>`
 
 ### Tags
-- `2.13-3.0.0`, `latest`
+- `2.13-3.3.1`, `latest`
+- `2.12-3.3.1`
+- `2.13-3.2.3`
+- `2.12-3.2.3`
+- `2.13-3.1.2`
+- `2.12-3.1.2`
+- `2.13-3.1.0`
+- `2.12-3.1.0`
+- `2.13-3.0.2`
+- `2.12-3.0.2`
+- `2.13-3.0.0`
+- `2.12-3.0.0`
+- `2.13-2.8.2`
+- `2.12-2.8.2`
 - `2.13-2.8.1`
 - `2.12-2.8.1`
+- `2.13-2.7.2`
+- `2.12-2.7.2`
 - `2.13-2.7.1`
 - `2.12-2.7.1`
