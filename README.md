@@ -50,7 +50,7 @@ services:
 ```
 
 ### Files (`files`)
-By setting `CONFIG_SOURCE` to `files` (e.g. `CONFIG_SOURCE: files`) conf files remain untoched and can be passed as link.
+By setting `CONFIG_SOURCE` to `files` (e.g. `CONFIG_SOURCE: files`) conf files remain untouched and can be passed as link.
 
 ```yml
 version: '3.8'
@@ -72,11 +72,11 @@ services:
 
 ## Docker compose examples
 ```shell
-docker-compose -f compose/single-kafka.yml up
+docker compose -f compose/single-kafka.yml up
 #or
-docker-compose -f compose/cluster-kafka.yml up
+docker compose -f compose/cluster-kafka.yml up
 #or for kraft cluster
-docker-compose -f compose/kraft-cluster.yml up
+docker compose -f compose/kraft-cluster.yml up
 ```
 
 
@@ -84,23 +84,7 @@ docker-compose -f compose/kraft-cluster.yml up
 Schema: `<scala version>-<kafka version>`
 
 ### Tags
-- `2.13-3.3.1`, `latest`
-- `2.12-3.3.1`
-- `2.13-3.2.3`
-- `2.12-3.2.3`
-- `2.13-3.1.2`
-- `2.12-3.1.2`
-- `2.13-3.1.0`
-- `2.12-3.1.0`
-- `2.13-3.0.2`
-- `2.12-3.0.2`
-- `2.13-3.0.0`
-- `2.12-3.0.0`
-- `2.13-2.8.2`
-- `2.12-2.8.2`
-- `2.13-2.8.1`
-- `2.12-2.8.1`
-- `2.13-2.7.2`
-- `2.12-2.7.2`
-- `2.13-2.7.1`
-- `2.12-2.7.1`
+- `3.3.1-2.13`, `latest`
+- `3.3.1-2.12`
+- `2.8.2-2.13`
+- `2.8.2-2.12`

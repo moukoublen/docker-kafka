@@ -3,9 +3,9 @@
 set -e
 
 __tag() {
-  local scala="${1}"
-  local kafka="${2}"
-  printf "${scala}-${kafka}"
+  local kafka="${1}"
+  local scala="${2}"
+  printf "${kafka}-${scala}"
 }
 
 DEFAULT_ARG_JRE='eclipse-temurin:17.0.4.1_1-jre-jammy'
@@ -69,7 +69,7 @@ while (($#)); do
   esac
 done
 
-[ -z "${ARG_TAG}" ] && ARG_TAG=$(__tag "${ARG_SCALA}" "${ARG_KAFKA}")
+[ -z "${ARG_TAG}" ] && ARG_TAG=$(__tag "${ARG_KAFKA}" "${ARG_SCALA}")
 
 IMAGE_NAME="moukoublen/kafka:${ARG_TAG}"
 
