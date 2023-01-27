@@ -8,7 +8,7 @@ __tag() {
   printf "${kafka}-${scala}"
 }
 
-DEFAULT_ARG_JRE='eclipse-temurin:17.0.4.1_1-jre-jammy'
+DEFAULT_ARG_JRE='eclipse-temurin:17.0.5_8-jre-jammy'
 DEFAULT_ARG_SCALA='2.13'
 DEFAULT_ARG_KAFKA='3.3.1'
 DEFAULT_ARG_TAG=$(__tag "${DEFAULT_ARG_SCALA}" "${DEFAULT_ARG_KAFKA}")

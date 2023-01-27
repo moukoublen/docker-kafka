@@ -3,9 +3,12 @@
 set -e
 
 KAFKA_HOME=${KAFKA_HOME:-"/opt/kafka"}
-SCALA_VERSION=${SCALA_VERSION:-2.13}
-KAFKA_VERSION=${KAFKA_VERSION:-3.0.0}
 FILENAME="kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz"
+
+if [[ "${SCALA_VERSION}" == "" ]] || [[ "${KAFKA_VERSION}" == "" ]]; then
+  echo "SCALA_VERSION and KAFKA_VERSION must be set"
+  exit 1
+fi
 
 echo "Installing kafka ${SCALA_VERSION}-${KAFKA_VERSION}"
 

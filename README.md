@@ -84,7 +84,9 @@ docker compose -f compose/kraft-cluster.yml up
 Schema: `<scala version>-<kafka version>`
 
 ### Tags
-- `3.3.1-2.13`, `latest`
+- `3.3.2-2.13`, `latest`
+- `3.3.2-2.12`
+- `3.3.1-2.13`
 - `3.3.1-2.12`
 - `2.8.2-2.13`
 - `2.8.2-2.12`
