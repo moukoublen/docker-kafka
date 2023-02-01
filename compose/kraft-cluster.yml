@@ -61,6 +61,29 @@ services:
       source: ./logs/kraft-kafka3
       target: /kafka-logs
 
+  topics-seed:
+    image: moukoublen/kafka:latest
+    restart: on-failure
+    command: >
+      bash -c "set -ex
+      echo 'Seeding topics'
+
+      kafka-topics.sh --bootstrap-server 'INTERNAL://kafka1:9092,INTERNAL://kafka2:9092,INTERNAL://kafka3:9092' \\
+        --create \\
+        --topic samples1 \\
+        --partitions 9 \\
+        --replication-factor 2 \\
+        --if-not-exists
+
+      kafka-topics.sh --bootstrap-server 'INTERNAL://kafka1:9092,INTERNAL://kafka2:9092,INTERNAL://kafka3:9092' \\
+        --create \\
+        --topic samples2 \\
+        --partitions 9 \\
+        --replication-factor 2 \\
+        --if-not-exists
+
+      kafka-topics.sh --bootstrap-server 'INTERNAL://kafka1:9092,INTERNAL://kafka2:9092,INTERNAL://kafka3:9092' --list"
+
 ## You can choose and uncomment one (or more) of those admin panels.
 
   # kafdrop:
