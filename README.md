@@ -69,6 +69,27 @@ services:
     restart: on-failure
 ```
 
+## Topics seeding in docker compose
+An easy way to create topics using docker compose is this:
+```yml
+services:
+  zookeeper:
+
+  kafka:
+    environment:
+      server.listeners: INSIDE://kafka:9092,OUTSIDE://kafka:9094
+      server.advertised.listeners: INSIDE://kafka:9092,OUTSIDE://localhost:9094
+
+
+  topics-seed:
+    image: moukoublen/kafka:latest
+    restart: on-failure
+    command: >
+      bash -c "set -ex
+      kafka-topics.sh --bootstrap-server 'INSIDE://kafka:9092' --create --topic samples1 --if-not-exists
+      "
+
+```
 
 ## Docker compose examples
 

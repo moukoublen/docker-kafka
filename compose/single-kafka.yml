@@ -1,7 +1,6 @@
-version: '3.8'
 services:
   zookeeper:
-    image: zookeeper:3.5.9
+    image: zookeeper:3.6.3
     ports:
       - "2181:2181"
     restart: on-failure
@@ -24,3 +23,24 @@ services:
     depends_on:
       - zookeeper
     restart: on-failure
+
+  topics-seed:
+    image: moukoublen/kafka:latest
+    restart: on-failure
+    command: >
+      bash -c "set -ex
+      echo 'Seeding topics'
+
+      kafka-topics.sh --bootstrap-server 'INSIDE://kafka:9092' \\
+        --create \\
+        --topic samples1 \\
+        --partitions 9 \\
+        --if-not-exists
+
+      kafka-topics.sh --bootstrap-server 'INSIDE://kafka:9092' \\
+        --create \\
+        --topic samples2 \\
+        --partitions 9 \\
+        --if-not-exists
+
+      kafka-topics.sh --bootstrap-server 'INSIDE://kafka:9092' --list"

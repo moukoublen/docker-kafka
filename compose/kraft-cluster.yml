@@ -96,14 +96,14 @@ services:
   #     JVM_OPTS: -Xms32M -Xmx64M
   #     SERVER_SERVLET_CONTEXTPATH: /
 
-  # kafka-ui:
-  #   # https://github.com/provectus/kafka-ui
-  #   image: provectuslabs/kafka-ui:latest
-  #   ports:
-  #     - 8080:8080
-  #   environment:
-  #     KAFKA_CLUSTERS_0_NAME: local
-  #     KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:9092,kafka2:9092,kafka3:9092
+  kafka-ui:
+    # https://github.com/provectus/kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8080:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:9092,kafka2:9092,kafka3:9092
 
   # akhq:
   #   # https://github.com/tchiotludo/akhq
