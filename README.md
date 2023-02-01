@@ -71,11 +71,20 @@ services:
 
 
 ## Docker compose examples
+
+Single kafka node
 ```shell
 docker compose -f compose/single-kafka.yml up
-#or
+```
+
+Cluster with zookeeper
+```shell
 docker compose -f compose/cluster-kafka.yml up
-#or for kraft cluster
+```
+
+Kraft cluster (with external mounting of kafka log directory)
+```shell
+mkdir -p ./compose/logs/kraft-kafka{1,2,3}
 docker compose -f compose/kraft-cluster.yml up
 ```
 
