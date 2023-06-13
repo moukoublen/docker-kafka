@@ -2,13 +2,31 @@ Kafka Docker
 ============
 
 Kafka docker image using `OpenJDK` and more specifically `eclipse-temurin:17-jre-jammy` as base image.
-Currently both `linux/amd64` and `linux/arm64` images are being produced.
+Currently images are being produced for these os/arch:
+- `linux/amd64`
+- `linux/arm/v7`
+- `linux/arm64/v8`
 
-Docker hub: [https://hub.docker.com/r/moukoublen/kafka](https://hub.docker.com/r/moukoublen/kafka).
+Docker Hub: [https://hub.docker.com/r/moukoublen/kafka](https://hub.docker.com/r/moukoublen/kafka).
 
-Github: [https://github.com/moukoublen/docker-kafka](https://github.com/moukoublen/docker-kafka).
+GitHub: [https://github.com/moukoublen/docker-kafka](https://github.com/moukoublen/docker-kafka).
 
-Based on excellent work of  [wurstmeister/kafka](https://github.com/wurstmeister/kafka-docker)
+Based on the excellent work of [wurstmeister/kafka](https://github.com/wurstmeister/kafka-docker)
+
+## Docker hub image tags
+Schema: `<scala version>-<kafka version>`
+
+### Tags
+- `3.4.1-2.13`, `latest`
+- `3.4.1-2.12`
+- `3.4.0-2.13`
+- `3.4.0-2.12`
+- `3.3.2-2.13`
+- `3.3.2-2.12`
+- `3.3.1-2.13`
+- `3.3.1-2.12`
+- `2.8.2-2.13`
+- `2.8.2-2.12`
 
 
 ## Configs source `CONFIG_SOURCE`
@@ -112,15 +130,3 @@ Kraft cluster (with external mounting of kafka log directory)
 mkdir -p ./compose/logs/kraft-kafka{1,2,3}
 docker compose -f compose/kraft-cluster.yml up
 ```
-
-
-## Docker hub image tags
-Schema: `<scala version>-<kafka version>`
-
-### Tags
-- `3.3.2-2.13`, `latest`
-- `3.3.2-2.12`
-- `3.3.1-2.13`
-- `3.3.1-2.12`
-- `2.8.2-2.13`
-- `2.8.2-2.12`

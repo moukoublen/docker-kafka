@@ -2,4 +2,5 @@
 
 docker pull tonistiigi/binfmt
 docker run --privileged --rm tonistiigi/binfmt --install all
-docker buildx create --use --name kafkabuilder
+#docker buildx create --use --name kafkabuilder
+docker buildx create --name kafkabuilder

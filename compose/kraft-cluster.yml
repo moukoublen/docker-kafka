@@ -1,3 +1,6 @@
+## Create local folders to bind/mount from inside `compose` folder
+# mkdir -p logs/kraft-kafka{1,2,3}
+
 x-environment-common: &environment-common
   KAFKA_CONFIG_SOURCE: env
   CLUSTER_ID: w3rNt4dlTIW_RoSUh7cmAQ
