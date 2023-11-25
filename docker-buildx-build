@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
-export JRE='eclipse-temurin:21.0.1_12-jre-jammy'
-export KAFKA='3.5.1'
-export SCALA='2.12'
-export IMAGE='moukoublen/kafka'
+__build() {
+  local JRE="${1}"
+  local KAFKA="${2}"
+  local SCALA="${3}"
+  local IMAGE="${4}"
 
-docker buildx build \
-  --builder kafkabuilder \
-  --file ./Dockerfile \
-  --build-arg jre="${JRE}" \
-  --build-arg kafka="${KAFKA}" \
-  --build-arg scala="${SCALA}" \
-  --output=type=registry \
-  --platform linux/arm64/v8,linux/amd64 \
-  --tag "${IMAGE}:${KAFKA}-${SCALA}" \
-  .
+  docker buildx build \
+    --builder kafkabuilder \
+    --file ./Dockerfile \
+    --build-arg jre="${JRE}" \
+    --build-arg kafka="${KAFKA}" \
+    --build-arg scala="${SCALA}" \
+    --output=type=registry \
+    --platform linux/arm64/v8,linux/amd64 \
+    --tag "${IMAGE}:${KAFKA}-${SCALA}" \
+    .
+}
+
+__build 'eclipse-temurin:21.0.1_12-jre-jammy' '3.5.1' '2.12' 'moukoublen/kafka'
