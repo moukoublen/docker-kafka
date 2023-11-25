@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.5
+# syntax=docker/dockerfile:1.6
 ### https://hub.docker.com/r/docker/dockerfile
 ARG jre
 

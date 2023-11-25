@@ -1,10 +1,9 @@
 Kafka Docker
 ============
 
-Kafka docker image using `OpenJDK` and more specifically `eclipse-temurin:17-jre-jammy` as base image.
+Kafka docker image using `OpenJDK` and more specifically `eclipse-temurin:21.0.1_12-jre-jammy` as base image.
 Currently images are being produced for these os/arch:
 - `linux/amd64`
-- `linux/arm/v7`
 - `linux/arm64/v8`
 
 Docker Hub: [https://hub.docker.com/r/moukoublen/kafka](https://hub.docker.com/r/moukoublen/kafka).
@@ -14,19 +13,14 @@ GitHub: [https://github.com/moukoublen/docker-kafka](https://github.com/moukoubl
 Based on the excellent work of [wurstmeister/kafka](https://github.com/wurstmeister/kafka-docker)
 
 ## Docker hub image tags
-Schema: `<scala version>-<kafka version>`
+Schema: `<kafka version>-<scala version>`
 
 ### Tags
-- `3.4.1-2.13`, `latest`
-- `3.4.1-2.12`
-- `3.4.0-2.13`
-- `3.4.0-2.12`
-- `3.3.2-2.13`
-- `3.3.2-2.12`
-- `3.3.1-2.13`
-- `3.3.1-2.12`
-- `2.8.2-2.13`
-- `2.8.2-2.12`
+- `3.6.0-2.13`, `latest`
+- `3.6.0-2.12`
+- `3.5.1-2.13`
+- `3.5.1-2.12`
+
 
 
 ## Configs source `CONFIG_SOURCE`
